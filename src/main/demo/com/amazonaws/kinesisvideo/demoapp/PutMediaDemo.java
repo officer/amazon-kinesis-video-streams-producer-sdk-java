@@ -41,7 +41,7 @@ import java.util.concurrent.CountDownLatch;
  *      ffmpeg -i input.mp4 -b:v 10M -minrate 10M -maxrate 10M -bufsize 10M -bf 0 input.mkv
  */
 public final class PutMediaDemo {
-    private static final String DEFAULT_REGION = "us-west-2";
+    private static final String DEFAULT_REGION = "eu-west-1";
     private static final String PUT_MEDIA_API = "/putMedia";
 
     /* the name of the stream */
@@ -59,8 +59,18 @@ public final class PutMediaDemo {
     /* connect timeout */
     private static final int CONNECTION_TIMEOUT_IN_MILLIS = 10_000;
 
+    private final String PROXY_SERVER_HOST = "192.0.0.24";
+    
+    private final int PROXY_SERVER_PORT = 1080;
+    
     private PutMediaDemo() { }
     public static void main(final String[] args) throws Exception {
+        
+        System.setProperty("http.proxyHost", PROXY_SERVER_HOST);
+        System.setProperty("http.proxyPort", PROXY_SERVER_PORT);
+        System.setProperty("https.proxyHost", PROXY_SERVER_HOST);
+        System.setProperty("https.proxyPort", PROXY_SERVER_PORT);
+        
         final AmazonKinesisVideo frontendClient = AmazonKinesisVideoAsyncClient.builder()
                 .withCredentials(AuthHelper.getSystemPropertiesCredentialsProvider())
                 .withRegion(DEFAULT_REGION)
