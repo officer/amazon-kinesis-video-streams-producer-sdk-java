@@ -59,9 +59,9 @@ public final class PutMediaDemo {
     /* connect timeout */
     private static final int CONNECTION_TIMEOUT_IN_MILLIS = 10_000;
 
-    private final String PROXY_SERVER_HOST = "192.0.0.24";
+    private static final String PROXY_SERVER_HOST = "192.0.0.24";
     
-    private final int PROXY_SERVER_PORT = 1080;
+    private static final String PROXY_SERVER_PORT = "1080";
     
     private PutMediaDemo() { }
     public static void main(final String[] args) throws Exception {
